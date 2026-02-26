@@ -17,20 +17,22 @@
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; overflow-x: hidden; margin: 0; }
         .hidden { display: none !important; }
         
-        /* Animações Originais extraídas do seu JS */
+        /* Animação Matrix Original */
         @keyframes matrix-fall { 0% { background-position: 0 0; } 100% { background-position: 0 22px; } }
-        .matrix-bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.28; background-image: repeating-linear-gradient(to right, rgba(168,85,247,0.08) 0px, rgba(168,85,247,0.08) 1px, transparent 1px, transparent 10px), repeating-linear-gradient(to bottom, rgba(168,85,247,0.12) 0px, rgba(168,85,247,0.12) 2px, transparent 2px, transparent 20px); animation: matrix-fall 18s linear infinite; }
+        .matrix-bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.25; background-image: repeating-linear-gradient(to right, rgba(168,85,247,0.08) 0px, rgba(168,85,247,0.08) 1px, transparent 1px, transparent 10px), repeating-linear-gradient(to bottom, rgba(168,85,247,0.12) 0px, rgba(168,85,247,0.12) 2px, transparent 2px, transparent 20px); animation: matrix-fall 18s linear infinite; }
         
+        /* Efeito de Brilho no Texto */
         .animate-text-shine {
-            background: linear-gradient(90deg, #a855f7 0%, #d8b4fe 25%, #ffffff 50%, #d8b4fe 75%, #a855f7 100%);
+            background: linear-gradient(90deg, #ffffff 0%, #d8b4fe 25%, #ffffff 50%, #d8b4fe 75%, #ffffff 100%);
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shine-text-wave 3s linear infinite;
+            animation: shine-text 3s linear infinite;
         }
-        @keyframes shine-text-wave { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+        @keyframes shine-text { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
         
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .loader { border: 2px solid rgba(168, 85, 247, 0.2); border-top: 2px solid #a855f7; border-radius: 50%; width: 20px; height: 20px; animation: spin 0.8s linear infinite; }
+        .loader { border: 2px solid rgba(168, 85, 247, 0.2); border-top: 2px solid #a855f7; border-radius: 50%; width: 22px; height: 22px; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .ig-gradient { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
     </style>
 </head>
 <body>
@@ -39,117 +41,107 @@
         <div class="matrix-bg"></div>
         <div class="w-full max-w-[500px] relative z-10">
             <div class="bg-black/40 backdrop-blur-xl border border-white/10 rounded-[40px] p-6 flex flex-col items-center shadow-2xl">
-                <img src="https://i.ibb.co/9m6pG513/f85d6e00-b101-4f91-9aff-0f3b3a3f1d09.png" class="w-64 h-64 object-contain -mt-8">
-                <h1 class="text-white text-[28px] md:text-[34px] font-black text-center leading-tight mb-2 -mt-10">
-                    Não fique na <span class="animate-text-shine">dúvida</span>. Descubra toda a verdade.
+                <img src="https://i.ibb.co/9m6pG513/f85d6e00-b101-4f91-9aff-0f3b3a3f1d09.png" class="w-64 mb-4 drop-shadow-lg">
+                <h1 class="text-white text-[32px] font-black text-center leading-tight mb-2 -mt-8">
+                    Não fique na <span class="animate-text-shine">dúvida</span>. Descubra a verdade.
                 </h1>
-                <p class="text-gray-400 text-center text-sm font-medium mb-6">Digite o nome de usuário sem o "@"</p>
+                <p class="text-gray-400 text-center text-sm mb-6">Digite o nome de usuário para monitorar</p>
                 
-                <div class="w-full relative group">
-                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 font-black text-xl italic">@</div>
-                    <input type="text" id="username-input" placeholder="Ex: nomedoconjuge_10" class="w-full h-16 bg-[#1a1a1a]/60 border-2 border-[#1a1a1a] rounded-full pl-14 pr-6 text-white font-bold text-lg outline-none focus:border-purple-500 transition-all">
+                <div class="w-full relative">
+                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 font-bold italic">@</div>
+                    <input type="text" id="username-input" placeholder="ex: neymarjr" class="w-full h-16 bg-[#1a1a1a] border-2 border-white/5 rounded-full pl-12 pr-6 text-white font-bold outline-none focus:border-purple-500 transition-all">
                 </div>
                 
-                <button onclick="handleSearch()" id="btn-search" class="w-full h-[68px] mt-4 bg-gradient-to-r from-[#6B59D8] to-[#9D4EDD] rounded-full font-black text-xl uppercase tracking-tight shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
-                    Espionar Agora
+                <button onclick="buscarPerfil()" id="btn-search" class="w-full h-16 mt-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full font-black text-lg uppercase tracking-tight shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center">
+                    ESPIAR AGORA
                 </button>
             </div>
+        </div>
+    </div>
+
+    <div id="screen-confirm" class="min-h-screen flex flex-col items-center justify-center p-6 hidden">
+        <div class="w-full max-w-[380px] bg-neutral-900/80 border border-white/10 rounded-[32px] p-8 text-center backdrop-blur-md">
+            <h2 class="text-purple-400 font-black text-xs uppercase tracking-[0.3em] mb-6">Alvo Identificado</h2>
+            <div class="relative w-32 h-32 mx-auto mb-4">
+                <div class="absolute -inset-1 ig-gradient rounded-full"></div>
+                <img id="conf-img" class="w-full h-full rounded-full border-4 border-black object-cover relative">
+            </div>
+            <h3 id="conf-user" class="text-2xl font-black mb-6"></h3>
             
-            <div class="flex justify-center gap-6 mt-6 opacity-80">
-                <div class="flex items-center gap-2 text-[13px] font-bold"><span class="text-purple-500">●</span> 100% Anônimo</div>
-                <div class="flex items-center gap-2 text-[13px] font-bold"><span class="text-purple-500">●</span> Sem Senha</div>
-                <div class="flex items-center gap-2 text-[13px] font-bold"><span class="text-purple-500">●</span> Teste Grátis</div>
+            <button onclick="confirmar()" class="w-full h-14 bg-white text-black rounded-xl font-black text-sm uppercase mb-3">SIM, É ESTE PERFIL</button>
+            <button onclick="location.reload()" class="text-gray-500 text-xs font-bold uppercase">CORRIGIR NOME</button>
+        </div>
+    </div>
+
+    <div id="screen-hacking" class="min-h-screen bg-black flex flex-col items-center justify-center p-6 hidden">
+        <div class="w-full max-w-[400px]">
+            <div class="flex justify-between mb-2">
+                <span class="text-purple-500 font-bold text-[10px] uppercase tracking-widest">Bypass Engine v6.1</span>
+                <span id="hack-perc" class="text-purple-500 font-mono text-xs">0%</span>
+            </div>
+            <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-6">
+                <div id="hack-bar" class="h-full bg-purple-500 shadow-[0_0_15px_#a855f7]" style="width: 0%"></div>
+            </div>
+            <div id="hack-logs" class="bg-[#0a0a0a] border border-white/5 p-4 rounded-xl font-mono text-[10px] text-green-500 h-40 overflow-y-auto space-y-1">
+                <p>> Inicializando script de extração...</p>
             </div>
         </div>
     </div>
 
-    <div id="screen-confirm" class="min-h-screen flex flex-col items-center justify-center p-6 hidden animate-fade-in">
-        <div class="w-full max-w-[420px] bg-black rounded-[32px] border border-white/10 p-8 shadow-2xl text-center">
-            <h2 class="text-2xl font-bold text-purple-500 mb-6">Confirme o Instagram</h2>
-            <div class="flex items-center gap-6 mb-8 text-left">
-                <img id="conf-img" class="w-20 h-20 rounded-full border border-white/20 object-cover">
-                <div class="flex-1">
-                    <div id="conf-user" class="font-black text-white text-lg">@username</div>
-                    <div class="flex gap-4 mt-1">
-                        <div class="text-center"><p class="text-sm font-bold" id="conf-posts">-</p><p class="text-[9px] text-gray-500 uppercase">Posts</p></div>
-                        <div class="text-center"><p class="text-sm font-bold" id="conf-followers">-</p><p class="text-[9px] text-gray-500 uppercase">Seguidores</p></div>
-                    </div>
-                </div>
-            </div>
-            <button onclick="startHacking()" class="w-full h-14 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-black text-lg uppercase mb-4 shadow-xl">Confirmar Alvo</button>
-            <button onclick="location.reload()" class="text-gray-500 text-xs font-bold">Corrigir @</button>
-        </div>
-    </div>
-
-    <div id="screen-hacking" class="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center hidden">
-        <div class="w-full max-w-[400px] px-6 text-center">
-            <img src="/instagram-logo.svg" class="w-40 invert mx-auto mb-10 opacity-80">
-            <div class="w-full bg-[#121212] border border-[#363636] rounded-lg p-4 mb-4 text-left font-mono text-[11px] text-green-400 h-48 overflow-hidden relative">
-                <div id="hack-logs" class="space-y-1">
-                    <p>> Bypass Engine v6.1 iniciado...</p>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-white/5">
-                    <div id="hack-progress-bar" class="h-full bg-purple-500 transition-all duration-300" style="width: 0%"></div>
-                </div>
-            </div>
-            <p id="hack-status" class="text-purple-500 font-bold animate-pulse text-sm uppercase tracking-widest">Injetando Scripts...</p>
-        </div>
-    </div>
-
-    <div id="screen-result" class="min-h-screen bg-[#020202] hidden animate-fade-in">
-        <header class="h-12 border-b border-white/10 flex items-center px-4 justify-between sticky top-0 bg-[#020202] z-50">
+    <div id="screen-result" class="min-h-screen bg-black hidden">
+        <header class="h-12 border-b border-white/10 flex items-center px-4 justify-between sticky top-0 bg-black z-50">
             <div class="flex items-center gap-3">
                 <svg viewBox="0 0 24 24" class="w-6 h-6 fill-white"><path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"/></svg>
-                <span id="ig-username-top" class="font-bold text-sm">perfil_alvo</span>
+                <span id="res-user-top" class="font-bold text-sm"></span>
             </div>
             <img src="https://i.ibb.co/9m6pG513/f85d6e00-b101-4f91-9aff-0f3b3a3f1d09.png" class="h-5">
         </header>
 
-        <div class="p-4 border-b border-white/5">
-            <div class="flex items-center gap-8 mb-6">
-                <div class="relative">
-                    <div class="absolute -inset-1.5 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 rounded-full"></div>
-                    <img id="ig-profile-pic" class="w-20 h-20 rounded-full border-2 border-black relative">
+        <div class="p-4">
+            <div class="flex items-center gap-8 mb-4">
+                <div class="relative w-20 h-20">
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-yellow-400 to-purple-600 rounded-full"></div>
+                    <img id="res-img" class="w-full h-full rounded-full border-2 border-black relative object-cover">
                 </div>
                 <div class="flex flex-1 justify-around text-center">
-                    <div><p class="font-black text-base" id="ig-posts">-</p><p class="text-[11px] text-gray-400">Publicações</p></div>
-                    <div><p class="font-black text-base" id="ig-followers">-</p><p class="text-[11px] text-gray-400">Seguidores</p></div>
-                    <div><p class="font-black text-base" id="ig-following">-</p><p class="text-[11px] text-gray-400">Seguindo</p></div>
+                    <div><p class="font-bold" id="res-posts">-</p><p class="text-[10px] text-gray-500">Publicações</p></div>
+                    <div><p class="font-bold" id="res-followers">-</p><p class="text-[10px] text-gray-500">Seguidores</p></div>
+                    <div><p class="font-bold" id="res-following">-</p><p class="text-[10px] text-gray-500">Seguindo</p></div>
                 </div>
             </div>
             <div class="text-sm">
-                <p class="font-black" id="ig-full-name">Nome</p>
-                <p class="text-gray-500 text-xs mb-1">Figura pública</p>
-                <p id="ig-bio" class="text-white whitespace-pre-wrap leading-snug">Biografia extraída do Instagram via Stalkea AI.</p>
+                <p class="font-bold" id="res-name"></p>
+                <p class="text-gray-500 text-xs mb-1 italic">Figura pública</p>
+                <p id="res-bio" class="text-white text-xs leading-snug"></p>
             </div>
             <div class="flex gap-2 mt-6">
-                <button class="flex-1 bg-white text-black font-black py-2 rounded-lg text-sm">Seguindo</button>
-                <button class="flex-1 bg-[#262626] text-white font-black py-2 rounded-lg text-sm">Mensagem</button>
+                <button class="flex-1 bg-white text-black font-bold py-1.5 rounded-lg text-sm">Seguindo</button>
+                <button class="flex-1 bg-[#262626] text-white font-bold py-1.5 rounded-lg text-sm">Mensagem</button>
             </div>
         </div>
 
-        <div id="ig-feed-grid" class="grid grid-cols-3 gap-0.5 mt-1">
+        <div id="res-grid" class="grid grid-cols-3 gap-0.5 mt-4">
             </div>
 
-        <div class="p-8 bg-gradient-to-b from-transparent to-black text-center space-y-4">
-            <div class="inline-block px-3 py-1 bg-red-500/20 text-red-500 rounded-full text-[10px] font-black uppercase">Acesso Restrito</div>
-            <p class="text-sm text-gray-400">Restam **124 stories** e **mensagens diretas** ocultas. Desbloqueie agora para ver tudo.</p>
-            <button onclick="window.location.href='https://seulinkdecheckout.com'" class="w-full py-4 bg-[#a855f7] rounded-2xl font-black text-sm uppercase shadow-2xl">Desbloquear Conteúdo Privado</button>
+        <div class="p-8 bg-neutral-900 border-t border-white/10 mt-10 text-center">
+            <h4 class="text-red-500 font-black text-xs uppercase mb-3">ACESSO LIMITADO</h4>
+            <p class="text-xs text-gray-400 mb-6">Existem **mensagens diretas** e **stories arquivados** protegidos.</p>
+            <button onclick="window.location.href='https://SEU_LINK_AQUI'" class="w-full py-4 bg-purple-600 rounded-2xl font-black text-sm uppercase shadow-lg">Desbloquear Tudo</button>
         </div>
     </div>
 
     <script>
-        const RAPID_KEY = 'e3cd2d0d2fmsh0dced0acd30a539p1c7338jsn42c4ecbbcca6';
-        const RAPID_HOST = 'instagram-looter2.p.rapidapi.com';
-        let targetData = null;
+        const API_KEY = 'e3cd2d0d2fmsh0dced0acd30a539p1c7338jsn42c4ecbbcca6';
+        const API_HOST = 'instagram-looter2.p.rapidapi.com';
+        let perfilGlobal = null;
 
-        function format(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num;
+        function fmt(n) {
+            if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
+            if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+            return n;
         }
 
-        async function handleSearch() {
+        async function buscarPerfil() {
             const user = document.getElementById('username-input').value.trim().replace('@','');
             if(!user) return;
 
@@ -158,96 +150,83 @@
             btn.disabled = true;
 
             try {
-                const res = await fetch(`https://${RAPID_HOST}/profile2?username=${user}`, {
-                    headers: { 'x-rapidapi-key': RAPID_KEY, 'x-rapidapi-host': RAPID_HOST }
+                const r = await fetch(`https://${API_HOST}/profile2?username=${user}`, {
+                    headers: { 'x-rapidapi-key': API_KEY, 'x-rapidapi-host': API_HOST }
                 });
-                const data = await res.json();
+                const data = await r.json();
 
                 if(data.id || data.pk) {
-                    targetData = data;
-                    showConfirm(data);
+                    perfilGlobal = data;
+                    document.getElementById('screen-home').classList.add('hidden');
+                    document.getElementById('screen-confirm').classList.remove('hidden');
+                    
+                    const img = `https://images.weserv.nl/?url=${encodeURIComponent(data.profile_pic_url_hd || data.profile_pic_url)}`;
+                    document.getElementById('conf-img').src = img;
+                    document.getElementById('conf-user').innerText = '@' + data.username;
                 } else {
-                    alert('Perfil não encontrado!');
+                    alert('Usuário não encontrado!');
                     location.reload();
                 }
-            } catch(e) { alert('Erro na conexão.'); location.reload(); }
+            } catch(e) { alert('Erro na API.'); location.reload(); }
         }
 
-        function showConfirm(data) {
-            document.getElementById('screen-home').classList.add('hidden');
-            document.getElementById('screen-confirm').classList.remove('hidden');
-            
-            const proxyImg = `https://images.weserv.nl/?url=${encodeURIComponent(data.profile_pic_url_hd || data.profile_pic_url)}`;
-            document.getElementById('conf-img').src = proxyImg;
-            document.getElementById('conf-user').innerText = '@' + data.username;
-            document.getElementById('conf-posts').innerText = format(data.media_count);
-            document.getElementById('conf-followers').innerText = format(data.follower_count);
-        }
-
-        function startHacking() {
+        function confirmar() {
             document.getElementById('screen-confirm').classList.add('hidden');
             document.getElementById('screen-hacking').classList.remove('hidden');
-            
-            const logs = document.getElementById('hack-logs');
-            const bar = document.getElementById('hack-progress-bar');
-            const messages = [
-                "Interceptando tokens...",
-                "Bypassing 2FA...",
-                "Acessando CDN...",
-                "Decrypting SQL...",
-                "Dump concluído!"
-            ];
-
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 2;
-                bar.style.width = progress + '%';
-                
-                if(progress % 20 === 0) {
-                    const p = document.createElement('p');
-                    p.innerText = "> " + messages[Math.floor(Math.random()*messages.length)];
-                    logs.appendChild(p);
-                }
-
-                if(progress >= 100) {
-                    clearInterval(interval);
-                    showResult();
-                }
-            }, 50);
+            iniciarHacking();
         }
 
-        async function showResult() {
-            // Preenche os dados IG
-            document.getElementById('ig-username-top').innerText = targetData.username;
-            document.getElementById('ig-profile-pic').src = `https://images.weserv.nl/?url=${encodeURIComponent(targetData.profile_pic_url_hd || targetData.profile_pic_url)}`;
-            document.getElementById('ig-full-name').innerText = targetData.full_name || targetData.username;
-            document.getElementById('ig-bio').innerText = targetData.biography || "No bio available";
-            document.getElementById('ig-posts').innerText = format(targetData.media_count);
-            document.getElementById('ig-followers').innerText = format(targetData.follower_count);
-            document.getElementById('ig-following').innerText = format(targetData.following_count);
+        async function iniciarHacking() {
+            const bar = document.getElementById('hack-bar');
+            const perc = document.getElementById('hack-perc');
+            const logs = document.getElementById('hack-logs');
+            const msgs = ["Injetando scripts...", "Bypassing tokens...", "Localizando CDN...", "Extraindo mídia..."];
+
+            for(let i=0; i<=100; i++) {
+                bar.style.width = i + '%';
+                perc.innerText = i + '%';
+                if(i % 25 === 0) {
+                    const p = document.createElement('p');
+                    p.innerText = "> " + msgs[i/25];
+                    logs.appendChild(p);
+                }
+                await new Promise(r => setTimeout(r, 40));
+            }
+            carregarResultados();
+        }
+
+        async function carregarResultados() {
+            // Preenche dados visuais
+            document.getElementById('res-user-top').innerText = perfilGlobal.username;
+            document.getElementById('res-img').src = `https://images.weserv.nl/?url=${encodeURIComponent(perfilGlobal.profile_pic_url_hd || perfilGlobal.profile_pic_url)}`;
+            document.getElementById('res-name').innerText = perfilGlobal.full_name || perfilGlobal.username;
+            document.getElementById('res-bio').innerText = perfilGlobal.biography || "Sem biografia disponível.";
+            document.getElementById('res-posts').innerText = fmt(perfilGlobal.media_count);
+            document.getElementById('res-followers').innerText = fmt(perfilGlobal.follower_count);
+            document.getElementById('res-following').innerText = fmt(perfilGlobal.following_count);
 
             document.getElementById('screen-hacking').classList.add('hidden');
             document.getElementById('screen-result').classList.remove('hidden');
 
-            // Carrega o Feed real
+            // Busca as fotos reais
             try {
-                const res = await fetch(`https://${RAPID_HOST}/user-feeds2?id=${targetData.id || targetData.pk}&count=12`, {
-                    headers: { 'x-rapidapi-key': RAPID_KEY, 'x-rapidapi-host': RAPID_HOST }
+                const r = await fetch(`https://${API_HOST}/user-feeds2?id=${perfilGlobal.id || perfilGlobal.pk}&count=12`, {
+                    headers: { 'x-rapidapi-key': API_KEY, 'x-rapidapi-host': API_HOST }
                 });
-                const feed = await res.json();
-                const grid = document.getElementById('ig-feed-grid');
+                const feed = await r.json();
+                const grid = document.getElementById('res-grid');
                 const items = feed.items || feed || [];
 
                 items.forEach(item => {
-                    const img = item.image_versions2?.candidates[0]?.url || item.display_url || item.thumbnail_url;
-                    if(img) {
+                    const imgUrl = item.image_versions2?.candidates[0]?.url || item.display_url || item.thumbnail_url;
+                    if(imgUrl) {
                         const div = document.createElement('div');
-                        div.className = "aspect-square bg-neutral-900 overflow-hidden";
-                        div.innerHTML = `<img src="https://images.weserv.nl/?url=${encodeURIComponent(img)}&w=300&h=300&fit=cover" class="w-full h-full object-cover">`;
+                        div.className = "aspect-square bg-neutral-900";
+                        div.innerHTML = `<img src="https://images.weserv.nl/?url=${encodeURIComponent(imgUrl)}&w=300&h=300&fit=cover" class="w-full h-full object-cover">`;
                         grid.appendChild(div);
                     }
                 });
-            } catch(e) { console.log('Erro feed'); }
+            } catch(e) { console.log("Erro ao carregar fotos."); }
         }
     </script>
 </body>
